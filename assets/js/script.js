@@ -1,19 +1,70 @@
 // Get a reference to the #add-employees-btn element
 const addEmployeesBtn = document.querySelector('#add-employees-btn');
 
+
+
 // Collect employee data
 const collectEmployees = function () {
   // TODO: Get user input to create and return an array of employee objects
+  let addAnother= true;
+  const employeesArray = [];
+  
+  while (addAnother === true)
+  {
+    let firstName = prompt("What is your first name?");
+    let lastName = prompt("What is your last name?");
+    let salary = parseInt(prompt("What is your salary?"));
+    //Check if salary is a number
+    function salaryNum(salary)
+    {
+      if (isNaN(salary)) {
+        salary = 0;
+      }
+      return salary;
+    }
+    
+    salary = salaryNum(salary);    
+    //Create array of employees
+
+    employeesArray.push({firstName, lastName, salary})
+    addAnother = confirm("Would you like to add another employee?");
+
+  }
+  console.log(employeesArray);
+  return employeesArray;
+
 };
 
 // Display the average salary
 const displayAverageSalary = function (employeesArray) {
   // TODO: Calculate and display the average salary
+  let totalSalary = 0;
+
+  for (let i = 0; i < employeesArray.length; i++)
+  {
+    totalSalary += Number(employeesArray[i].salary);
+  }
+
+
+let averageSalary = totalSalary / employeesArray.length;
+
+  // console.log("The average employee salary between our " +employeesArray.length+ " employee(s) is $" + averageSalary);
+
+  console.log(`The average employee salary between our ${employeesArray.length} employee(s) is $${averageSalary.toFixed(2)}`);
+
+
 };
 
 // Select a random employee
 const getRandomEmployee = function (employeesArray) {
   // TODO: Select and display a random employee
+  let randomEmployee = Math.floor(Math.random() * employeesArray.length);
+
+//  console.log("Congratulations to " + employeesArray[randomEmployee].firstName + " " + employeesArray[randomEmployee].lastName + ", for being selected as the random employee of the day!");
+
+
+
+  console.log(`Congratulations to ${employeesArray[randomEmployee].firstName} ${employeesArray[randomEmployee].lastName}, our random drawing winner!`);
 };
 
 /*
